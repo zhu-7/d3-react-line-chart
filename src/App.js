@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import * as d3 from "d3";
 import LineClass from './LineClass';
-import LineHook from './LineHook'; 
-import LineChart from "./LineChart";
+import LineSVG from "./LineSVG";
 
 function App() {
 
@@ -40,17 +39,8 @@ d3.range(length).map((item, index) => ({
             />
           </div>
           <div>
-            <span className="label">Hook Line </span>
-            <LineHook
-              data={data}
-              width={460}
-              height={400}
-              margin={{top: 10, right: 30, bottom: 30, left: 60}}
-            />
-          </div>
-          <div>
-            <span className="label">Line SVG</span>
-            <LineChart
+            <span className="label">Line SVG (Hook)</span>
+            <LineSVG
               data={data}
               width={460}
               height={400}
