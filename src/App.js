@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import * as d3 from "d3";
-import PieClass from "./PieClass";
-import PieHook from "./PieHook";
-import PieSVG from "./PieSVG";
 import LineClass from './LineClass';
 import LineHook from './LineHook'; 
 import LineChart from "./LineChart";
@@ -32,36 +29,6 @@ d3.range(length).map((item, index) => ({
       <div className="App">
           <div>
               <button onClick={changeData}>Transform</button>
-          </div>
-          <div>
-              <span className="label">React Class</span>
-              <PieClass 
-                data={data}
-                width={200}
-                height={200}
-                innerRadius={60}
-                outerRadius={100} 
-              />
-          </div>
-          <div>
-              <span className="label">Hooks</span>
-              <PieHook 
-                data={data}
-                width={200}
-                height={200}
-                innerRadius={60}
-                outerRadius={100} 
-              />
-          </div>
-          <div>
-              <span className="label">SVG element</span>
-              <PieSVG 
-                data={data}
-                width={200}
-                height={200}
-                innerRadius={60}
-                outerRadius={100}
-              />
           </div>
           <div>
             <span className="label">Class Line </span>
