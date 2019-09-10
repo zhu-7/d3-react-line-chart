@@ -57,10 +57,6 @@ class LineClass extends Component {
         const svg = d3.select(this.ref.current);
         const rawdata = nextProps.data;
 
-        let valueline = d3.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.value); });
-
         const data = rawdata.map((d)=>({value: +d.value,
             date: d3.timeParse("%d-%m-%Y")(d.date)
            }));
@@ -73,10 +69,20 @@ class LineClass extends Component {
                     .domain([0, d3.max(data, function(d){return +d.value ;})])
                     .range([nextProps.height, 0]);
 
-        svg.exit().remove();
-        svg.transition();
-        svg.select(".line")
-            .attr("d",    valueline(data));
+        const u = svg.selectAll('.line').data([data], (d)=>d.date);
+        u
+        .enter()
+        .append("path")
+        .attr("class","line")
+        .merge(u)
+        .transition()
+        .duration(3000)
+        .attr("d", d3.line()
+          .x(function(d) { return x(d.date); })
+          .y(function(d) { return y(d.value); }))
+          .attr("fill", "none")
+          .attr("stroke", "steelblue")
+          .attr("stroke-width", 1.5)
 
         svg.select(".x.axis").call(d3.axisBottom(x));
         svg.select(".y.axis").call(d3.axisLeft(y));

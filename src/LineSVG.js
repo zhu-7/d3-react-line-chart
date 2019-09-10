@@ -1,7 +1,6 @@
 
 import React, {useEffect, useRef} from "react";
 import * as d3 from "d3";
-import { userInfo } from "os";
 
 const LineSVG = props => {
     const refx = useRef(null);
@@ -32,13 +31,13 @@ const LineSVG = props => {
     .x(function(d) { return x(d.date); })
     .y(function(d) { return y(d.value); });
 
-    d3.select(refl.current).attr("d", valueline(data));
+    d3.select(refl.current).transition().duration(3000).attr("d", valueline(data));
 
   } , [props.data]);
 
     return (
        <svg width={props.width + props.margin.left + props.margin.right} height={props.height + props.margin.top + props.margin.bottom}>
-         <g transform={`translate(${props.margin.left}, ${props.margin.top})`}>
+         <g transform={`translate(${props.margin.left},${props.margin.top})`}>
            <g className='x axis' transform={("translate(0," + props.height + ")")} ref={refx}/>;
            <g className='y axis' ref={refy}/>;
            <path style={{fill:"none", "strokeWidth": 1.5, stroke:"steelblue"}} ref={refl} />
