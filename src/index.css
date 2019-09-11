@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-line { 
+.line { 
     stroke: steelblue;
     stroke-width: 1.5;
     fill: none;

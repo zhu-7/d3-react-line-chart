@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as d3 from "d3";
 import LineClass from './LineClass';
 import LineSVG from "./LineSVG";
+import TimeLineChart from './ChartClass/TimeLineChart';
 
 function App() {
 
@@ -45,6 +46,18 @@ d3.range(length).map((item, index) => ({
               width={460}
               height={400}
               margin={{top: 10, right: 30, bottom: 30, left: 60}}
+            />
+          </div>
+          <div>
+          <span className="label">Line Class with more flexibility</span>
+            <TimeLineChart
+              data={data}
+              width={550}
+              height={440}
+              xFn={d=>d.date}
+              yFn={d=>d.value}
+              margin={{top: 10, right: 30, bottom: 30, left: 60}}
+              xTickFormat='%d-%m-%Y'
             />
           </div>
       </div>
