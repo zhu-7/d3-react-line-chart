@@ -6,6 +6,7 @@ import TimeLineChart from './ChartClass/TimeLineChart';
 
 function App() {
 
+  const xTickFormat = '%d-%m-%Y';
   const start = new Date(2012, 0, 1);
   const end = new Date(); 
 
@@ -15,8 +16,8 @@ function App() {
 }
 const generateData = (value, length = 5) =>
 d3.range(length).map((item, index) => ({
-  date: randomDate(),
-  value: value === null || value === undefined ? Math.random() * 1000 : value
+  date: d3.timeParse(xTickFormat)(randomDate()),
+  value: value === null || value === undefined ? Math.random() * 1000 : +value
 }));
 
 
@@ -57,8 +58,7 @@ d3.range(length).map((item, index) => ({
               xFn={d=>d.date}
               yFn={d=>d.value}
               margin={{top: 10, right: 30, bottom: 30, left: 60}}
-              xTickFormat='%d-%m-%Y'
-            />
+              xTickFormat={xTickFormat}            />
           </div>
       </div>
   );

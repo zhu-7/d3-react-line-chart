@@ -9,13 +9,7 @@ class LineClass extends Component {
 
     componentDidMount(){
         const svg = d3.select(this.ref.current);
-        const rawdata = this.props.data;
-        const { width, height, margin } = this.props;
-
-       const data = rawdata.map((d)=>({value: +d.value,
-            date: d3.timeParse("%d-%m-%Y")(d.date)
-           }));
-
+        const { data, width, height, margin } = this.props;
         const x = d3.scaleTime()
                     .domain(d3.extent(data, function(d){return d.date;}))
                     .range([0, width]);
@@ -55,13 +49,9 @@ class LineClass extends Component {
 
     componentWillUpdate(nextProps, nextState){
         const svg = d3.select(this.ref.current);
-        const rawdata = nextProps.data;
+        const data = nextProps.data;
 
-        const data = rawdata.map((d)=>({value: +d.value,
-            date: d3.timeParse("%d-%m-%Y")(d.date)
-           }));
-
-           const x = d3.scaleTime()
+        const x = d3.scaleTime()
                     .domain(d3.extent(data, function(d){return d.date;}))
                     .range([0, nextProps.width]);
 

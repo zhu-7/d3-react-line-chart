@@ -8,12 +8,7 @@ const LineSVG = props => {
     const refl = useRef(null); 
     useEffect(
       () => {
-    const rawdata = props.data;
-    const {width, height} = props; 
-    const data = rawdata.map((d)=>({
-        value: +d.value,
-        date: d3.timeParse("%d-%m-%Y")(d.date)
-       }));
+    const {data, width, height} = props; 
   
     const x = d3.scaleTime()
        .domain(d3.extent(data, function(d){return d.date;}))

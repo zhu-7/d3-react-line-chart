@@ -6,17 +6,14 @@ class TimeLineChart extends Component {
 
     render() {
         const {data, width, height, margin, xFn, yFn, xTickFormat} = this.props; 
-        const rawdata = data.map((d)=>({value: +d.value,
-            date: d3.timeParse(xTickFormat)(d.date)
-           }));
         const xScale = d3.scaleTime();
         const yScale = d3.scaleLinear();
 
         const chartWidth = width - margin.left - margin.right;
         const chartHeight = height - margin.top - margin.bottom;
-        xScale.domain(d3.extent(rawdata, d=>xFn(d)))
+        xScale.domain(d3.extent(data, d=>xFn(d)))
           .range([0, chartWidth]);
-        yScale.domain([0, d3.max(rawdata, d=>yFn(d))])
+        yScale.domain([0, d3.max(data, d=>yFn(d))])
           .range([chartHeight, 0]);
 
         const metaData = {
@@ -26,7 +23,7 @@ class TimeLineChart extends Component {
         };
                 
         const lineData = {
-            data: rawdata.map((d)=>({
+            data: data.map((d)=>({
             y: yScale(yFn(d)),
             x: xScale(xFn(d))
             }))
