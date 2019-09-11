@@ -31,7 +31,7 @@ class LineClass extends Component {
 
       const group = svg
       .append("g")
-      .attr("transfrom", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
       group.append("g")
           .attr("transform", "translate(0," + height + ")")
