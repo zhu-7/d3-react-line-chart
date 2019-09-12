@@ -3,7 +3,7 @@ import React, {useEffect, useRef} from "react";
 import * as d3 from "d3";
 
 const LineSVG = props => {
-    const refx = useRef(null);
+const refx = useRef(null);
     const refy = useRef(null);
     const refl = useRef(null); 
     useEffect(
