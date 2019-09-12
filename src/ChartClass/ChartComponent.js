@@ -42,17 +42,18 @@ export const YAxisLinear = D3BaseGroup(function(){
 });
 
 export const Line = D3BaseGroup(function(){
+  const styleClass = this.props.class;
   const line = d3.line()
     .x(d => d.x)
     .y(d => d.y);
   const group = d3.select(this.refs.element);
-  const current = group.selectAll('.line').data([this.props.data]);
+  const current = group.selectAll('.'+ styleClass).data([this.props.data]);
   current.interrupt(); 
 
   current
     .enter()
     .append('path')
-    .attr('class','line')
+    .attr('class', styleClass)
     .merge(current)
     .transition()
     .duration(2000)

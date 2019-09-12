@@ -17,6 +17,16 @@ code {
     stroke-width: 1.5;
     fill: none;
 }
+.line-red { 
+  stroke: red;
+  stroke-width: 1.5;
+  fill: none;
+}
+.line-yellow { 
+  stroke: yellow;
+  stroke-width: 1.5;
+  fill: none;
+}
 
 .axis path,
 .axis line {

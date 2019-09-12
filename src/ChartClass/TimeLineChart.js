@@ -5,7 +5,7 @@ import { XAxisTime, YAxisLinear, Line } from './ChartComponent';
 class TimeLineChart extends Component {
 
   render() {
-    const {data, width, height, margin, xFn, yFn, xTickFormat} = this.props; 
+    const {lineclass, data, width, height, margin, xFn, yFn, xTickFormat} = this.props; 
     const xScale = d3.scaleTime();
     const yScale = d3.scaleLinear();
 
@@ -34,7 +34,7 @@ class TimeLineChart extends Component {
         <g transform={`translate(${margin.left},${margin.top})`}>
           <XAxisTime {...metaData} transform= {`translate(0,${chartHeight})`} />
           <YAxisLinear {...metaData} />
-          <Line {...lineData}/>
+          <Line {...lineData} class={lineclass} />
         </g>
       </svg>
     );
