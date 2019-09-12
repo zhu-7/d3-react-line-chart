@@ -14,6 +14,8 @@ function App() {
   const width = 550;
   const height = 440;
   const margin = {top: 10, right: 30, bottom: 30, left: 60};
+  const chartWidth = width - margin.left - margin.right;
+  const chartHeight = height - margin.top - margin.bottom;
 
   function randomDate() {
     const temp = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
@@ -32,6 +34,30 @@ function App() {
     setData(generateData());
   };
 
+  /*********************************************************************/
+  const xScaleD = d3.scaleTime();
+  const yScaleD = d3.scaleLinear();
+  xScaleD.domain(d3.extent(data, d=>d.date))
+    .range([0, chartWidth]);
+  yScaleD.domain([0, d3.max(data, d=>d.value)])
+    .range([chartHeight, 0]);
+
+  const metaDataD = {
+    xScale: xScaleD,
+    yScale: yScaleD,
+    xTickFormat
+  };
+                
+  const lineDataD = {
+    data: data.map((d)=>({
+      y: yScaleD(d.value),
+      x: xScaleD(d.date)
+    }))
+  };
+
+  const xAxisD = <XAxisTime {...metaDataD} transform= {`translate(0,${chartHeight})`} />;
+  const yAxisD = <YAxisLinear {...metaDataD} />;
+  const lineValueD = <Line {...lineDataD} class='line' />;
   /*********************************************************************************************/
   const sampleData = [
     { date: '27-07-2013', red: 5, green: 1, yellow: 2, target: 1, value: 3 },
@@ -51,9 +77,6 @@ function App() {
   const topvalue = d3.max(sampleLineData, function(d) {
     return Math.max(d.yellow, d.red, d.value, d.target, d.green);
   });
-
-  const chartWidth = width - margin.left - margin.right;
-  const chartHeight = height - margin.top - margin.bottom;
   const xScale = d3.scaleTime();
   const yScale = d3.scaleLinear();
   xScale.domain(d3.extent(sampleLineData, d=>d.date))
@@ -124,6 +147,17 @@ function App() {
           margin={margin}
           lineclass='line'
           xTickFormat={xTickFormat} />
+      </div>
+      <div>
+        <span className="label">Line Class with Line as child Component with Sample Data</span>
+        <LineChart
+          xAxis={xAxisD}
+          yAxis={yAxisD}
+          width={width}
+          height={height}
+          margin={margin}>
+          {lineValueD}
+        </LineChart>
       </div>
       <div>
         <span className="label">Line Class with Line as child Component with Sample Data</span>
