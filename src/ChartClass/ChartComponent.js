@@ -19,24 +19,26 @@ export default function D3BaseGroup(render){
 }
 
 export const XAxisTime = D3BaseGroup(function() {
+  const styleClass = this.props.class;
   const axis = d3
     .axisBottom()
     .tickFormat(d => d3.timeFormat(this.props.xTickFormat)(d))
     .scale(this.props.xScale);
     
   d3.select(this.refs.element)
-    .attr('class', 'x axis time')
+    .attr('class', styleClass)
     .transition()
     .call(axis);
 });
 
 export const YAxisLinear = D3BaseGroup(function(){
+  const styleClass = this.props.class;
   const axis = d3
     .axisLeft()
     .scale(this.props.yScale);
 
   d3.select(this.refs.element)
-    .attr('class', 'y axis linear')
+    .attr('class', styleClass)
     .transition()
     .call(axis);
 });

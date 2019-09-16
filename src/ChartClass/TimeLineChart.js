@@ -32,8 +32,8 @@ class TimeLineChart extends Component {
     return(
       <svg width={width} height={height}>
         <g transform={`translate(${margin.left},${margin.top})`}>
-          <XAxisTime {...metaData} transform= {`translate(0,${chartHeight})`} />
-          <YAxisLinear {...metaData} />
+          <XAxisTime {...metaData} transform= {`translate(0,${chartHeight})`} class='x axis time' />
+          <YAxisLinear {...metaData} class='y axis linear'/>
           <Line {...lineData} class={lineclass} />
         </g>
       </svg>

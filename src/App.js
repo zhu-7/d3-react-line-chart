@@ -55,8 +55,8 @@ function App() {
     }))
   };
 
-  const xAxisD = <XAxisTime {...metaDataD} transform= {`translate(0,${chartHeight})`} />;
-  const yAxisD = <YAxisLinear {...metaDataD} />;
+  const xAxisD = <XAxisTime {...metaDataD} transform= {`translate(0,${chartHeight})`} class='x axis time' />;
+  const yAxisD = <YAxisLinear {...metaDataD} class='y axis linear' />;
   const lineValueD = <Line {...lineDataD} class='line' />;
   /*********************************************************************************************/
   const sampleData = [
@@ -116,13 +116,13 @@ function App() {
   };
   const areaDataYellow = {
     data: sampleLineData.map((d)=>({
-      y0:yScale(d.green),
+      y0: yScale(d.green),
       y1: yScale(d.yellow),
       x: xScale(d.date)
     }))
   };
-  const xAxis = <XAxisTime {...metaData} transform= {`translate(0,${chartHeight})`} />;
-  const yAxis = <YAxisLinear {...metaData} />;
+  const xAxis = <XAxisTime {...metaData} transform= {`translate(0,${chartHeight})`} class='x axis time' />;
+  const yAxis = <YAxisLinear {...metaData} class='y axis linear' />;
   const lineValue = <Line {...lineDataValue} class='line' />;
   const lineGreen = <Line {...lineDataGreen} class='line-green' />;
   const lineRed = <Line {...lineDataRed} class='line-red' />;
