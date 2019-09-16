@@ -4,7 +4,7 @@ import LineClass from './LineClass';
 import LineSVG from './LineSVG';
 import TimeLineChart from './ChartClass/TimeLineChart';
 import LineChart from './ChartClass/LineChart';
-import { XAxisTime, YAxisLinear, Line } from './ChartClass/ChartComponent';
+import { XAxisTime, YAxisLinear, Line, Area } from './ChartClass/ChartComponent';
 
 function App() {
 
@@ -95,6 +95,13 @@ function App() {
       x: xScale(d.date)
     }))
   };
+
+  const lineDataGreen = {
+    data: sampleLineData.map((d)=>({
+      y: yScale(d.green),
+      x: xScale(d.date)
+    }))
+  };
   const lineDataRed = {
     data: sampleLineData.map((d)=>({
       y: yScale(d.red),
@@ -107,11 +114,20 @@ function App() {
       x: xScale(d.date)
     }))
   };
+  const areaDataYellow = {
+    data: sampleLineData.map((d)=>({
+      y0:yScale(d.green),
+      y1: yScale(d.yellow),
+      x: xScale(d.date)
+    }))
+  };
   const xAxis = <XAxisTime {...metaData} transform= {`translate(0,${chartHeight})`} />;
   const yAxis = <YAxisLinear {...metaData} />;
   const lineValue = <Line {...lineDataValue} class='line' />;
+  const lineGreen = <Line {...lineDataGreen} class='line-green' />;
   const lineRed = <Line {...lineDataRed} class='line-red' />;
   const lineYellow = <Line {...lineDataYellow} class='line-yellow' />;
+  const areaYellow = <Area {...areaDataYellow} class='area-yellow' />;
   /**********************************************************************************************/
   return (
     <div className="App">
@@ -167,9 +183,11 @@ function App() {
           width={width}
           height={height}
           margin={margin}>
+          {lineGreen}
           {lineValue}
           {lineRed}
           {lineYellow}
+          {areaYellow}
         </LineChart>
       </div>
     </div>

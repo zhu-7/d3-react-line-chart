@@ -59,3 +59,25 @@ export const Line = D3BaseGroup(function(){
     .duration(2000)
     .attr('d', line);
 });
+
+export const Area = D3BaseGroup(function(){
+  const styleClass = this.props.class;
+
+  const area = d3
+    .area()
+    .x(d => d.x)
+    .y0(d => d.y0)
+    .y1(d => d.y1);
+  const group = d3.select(this.refs.element);
+  const current = group.selectAll('.'+ styleClass).data([this.props.data]);
+  current.interrupt(); 
+
+  current
+    .enter()
+    .append('path')
+    .attr('class', styleClass)
+    .merge(current)
+    .transition()
+    .duration(2000)
+    .attr('d', area);
+});
